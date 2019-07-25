@@ -4,8 +4,8 @@ import "./App.css";
 
 export default function MemberForm() {
   // Use an object to track multiple fields:
-  const [team, setTeam] = useState({ name: "", role: "", email: "" });
-  const [member, setMember] = useState([]);
+  const [member, setMember] = useState({ name: "", role: "", email: "" });
+  const [team, setTeam] = useState([]);
 
   function handleChange(event) {
     // const updatedUser = { ...team, [event.target.id]: event.target.value };
@@ -14,14 +14,21 @@ export default function MemberForm() {
     const value = event.target.value;
     const name = event.target.name;
     // console.log("handleChange", event.target.team, value, updatedUser);
-    setTeam({ ...team, [name]: value });
-    // name: sets the value to the name which is dynamic as seen in your return
+    setMember({ ...member, [name]: value });
+    console.log(member);
+    // setTeam([...team, [name], value]);
+
+    // name: sets the value to the name which is dynamic as seen in your return.
+    // in my different inputs i set name=name name=role name=email so thats where name is coming from
     // console.log("team variable", team);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(event.target.value);
+    // team.push(member);
+    setTeam([...team, member]);
+    console.log("team update", team);
   }
 
   return (
@@ -39,7 +46,7 @@ export default function MemberForm() {
                 className="form-control"
                 name="name"
                 placeholder="Enter your name"
-                value={team.name}
+                value={member.name}
                 onChange={handleChange}
               />
             </div>
@@ -51,19 +58,19 @@ export default function MemberForm() {
               className="form-control"
               name="role"
               placeholder="Enter Your Role"
-              value={team.role}
+              value={member.role}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input
-              type="email"
+              type="text"
               className="form-control"
               name="email"
               aria-describedby="emailHelp"
               placeholder="Enter email"
-              value={team.email}
+              value={member.email}
               onChange={handleChange}
             />
           </div>
@@ -72,6 +79,20 @@ export default function MemberForm() {
           </button>
         </fieldset>
       </form>
+      {team.map(member => (
+        <div>
+          <div>{member.name}</div>
+          <div>{member.role}</div>
+          <div>{member.email}</div>
+        </div>
+      ))}
+      {/* <div>
+        {" "}
+        {member.role} {member.email} {member.name}{" "}
+      </div> */}
+      {/* {member.role}
+      {member.email}
+      {member.name} */}
       {/* members:{team} */}
     </div>
   );

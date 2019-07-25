@@ -9,7 +9,9 @@ export default function App() {
   return (
     <div className="App">
       <h1>Team Member Sign Up</h1>
-      <MemberForm  />
+      <div>
+        <MemberForm />
+      </div>
     </div>
   );
 }
